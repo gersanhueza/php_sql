@@ -24,7 +24,47 @@
 
 	<?php include "includes/header.php" ?>
 
-	<div id="contenido"></div>
+<div class="container-fluid mt-2">
+
+<div class="row my-4">
+
+	<div class="col-6">
+		<h1>LISTADO MASCOTAS</h1>
+	</div>
+
+	<div class="col-6 d-grid gap-2 d-md-flex justify-content-md-end mb-2 mt-2">
+	<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportar">Exportar
+	<i class="bi bi-file-earmark-arrow-down"></i></button>
+
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregar">Agregar
+	Mascota <i class="bi bi-person-plus"></i></button>
+	</div>
+</div>
+
+
+<div class="row">
+<div class="col-12">
+	<div class="table-responsive">
+		<table id="lista_mascotas" class="table table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Edad</th>
+					<th>Fecha de Nacimiento</th>
+					<th style="width:300px;">Accion</th>
+
+				</tr>
+			</thead>
+
+		</table>
+	</div>
+</div>
+</div>
+
+
+
+</div>
 
 	
 		<?php include "includes/modal.php" ?>
@@ -38,6 +78,9 @@
 		<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
 		<script src="js/ingresar.js"></script>
+		<script src="js/listar.js"></script>
+		<script src="js/eliminar.js"></script>
+		<script src="js/editar.js"></script>
 				
 
 </body>

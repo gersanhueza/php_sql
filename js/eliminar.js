@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('.btn_eliminar').click(function (e) {
+  $(document).on("click", ".btn_eliminar", function () {
 
         fila = $(this).closest("tr");
         id = parseInt(fila.find('td:eq(0)').text());
@@ -30,7 +30,7 @@ $(document).ready(function () {
                     title: 'Registro eliminado con exito'
                   })
       
-                  $("#contenido").load('includes/tabla.php');
+                  lista_mascotas.ajax.reload(null, false);
       
                 }
               });

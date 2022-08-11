@@ -1,10 +1,39 @@
 $(document).ready(function () {
 
-    $('#btn_guardar').click(function (e) {
-        e.preventDefault();
-        var nombre  = $("#nombre").val();
-        var edad    = $("#edad").val();
-        var fecha    = $("#fecha").val();
+    $(document).on("click", ".btn_editar", function () {
+
+        console.log("prueba");
+
+        fila = $(this).closest("tr");
+        id = parseInt(fila.find('td:eq(0)').text());
+
+        $('#id_editar').val(id);
+
+        $.ajax({
+            type: "POST",
+            url: "includes/procesa_cargar.php",
+            data: {id},
+
+            success: function (a) {
+                console.log(a)
+                var data = JSON.parse(a);
+
+                $('#nombre_editar').val(data.nombre);
+                $('#edad_editar').val(data.edad);
+                $('#fecha_editar').val(data.fecha);
+                $('#editar').modal('show');
+            }
+        });
+
+       
+    });
+
+    $('#btn_modificar').click(function (e) {
+
+        var nombre  = $("#nombre_editar").val();
+        var edad    = $("#edad_editar").val();
+        var fecha   = $("#fecha_editar").val();
+        var id      = $("#id_editar").val();
 
         if (nombre == "" ||
             edad == "" ||
@@ -21,11 +50,12 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: "POST",
-                url: "includes/procesa_insertar.php",
+                url: "includes/procesa_modificar.php",
                 data: {
                     nombre,
                     edad,
-                    fecha
+                    fecha,
+                    id
                 },
 
                 success: function (a) {
@@ -38,15 +68,11 @@ $(document).ready(function () {
                             title: 'AVISO',
                             position: 'top',
                             allowOutsideClick: false,
-                            text: "Registro Ingresado Correctamente",
+                            text: "Registro Actualizado Correctamente",
                             icon: 'success'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                
-                                $('#nombre').val("");
-                                $('#edad').val("");
-                                $('#fecha').val("");
-                                $('#agregar').modal('hide');
+                                $('#editar').modal('hide');
                                 lista_mascotas.ajax.reload(null, false);
                                 
                             }
@@ -73,5 +99,6 @@ $(document).ready(function () {
             });
 
         }
+
     });
 });
